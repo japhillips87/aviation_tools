@@ -82,5 +82,6 @@ test:
 production:
   <<: *default
   database: aviation_tools_production
-  username: aviation_tools
-  password: <%= ENV['AVIATION_TOOLS_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: password
+  host: 192.168.1.103

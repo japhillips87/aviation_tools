@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_18_015637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "app_tokens", force: :cascade do |t|
+    t.text "mfb_token"
+    t.text "mfb_refresh_token"
+    t.integer "mfb_token_expires_at"
+    t.text "mfb_client_id"
+    t.text "mfb_client_secret"
+    t.integer "singleton_guard"
+    t.index ["singleton_guard"], name: "index_app_tokens_on_singleton_guard", unique: true
+  end
 
 end
