@@ -7,20 +7,9 @@ class AirportService
   end
 
   def visited
-    refresh_token if app_tokens.mfb_token_expires_at - Time.now.to_i <= 60 * 60 * 24 * 2 # 2 days
-
     JSON.parse(RestClient.get(visited_url, params: params).body).map do |visited|
       visited['Code']
     end
-  end
-
-  private
-
-  attr_accessor :app_tokens, :base_url
-
-  def visited_url
-    base_url + '/VisitedAirports'
-
   end
 
   def refresh_token
@@ -29,6 +18,20 @@ class AirportService
     app_tokens.update(mfb_token: json['access_token'],
                       mfb_refresh_token: json['refresh_token'],
                       mfb_token_expires_at: Time.now.to_i + json['expires_in'])
+
+    schedule_refresh_token_job
+  end
+
+  private
+
+  attr_accessor :app_tokens, :base_url
+
+  def visited_url
+    base_url + '/VisitedAirports'
+  end
+
+  def schedule_refresh_token_job
+    self.delay(run_at: 7.days.from_now).refresh_token
   end
 
   def params
