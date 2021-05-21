@@ -18,7 +18,7 @@ EXPOSE 3000
 
 ENV RAILS_ENV production
 
-RUN bin/delayed_job start
+RUN bin/rails db:migrate
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ./start.sh

@@ -20,7 +20,7 @@ class MetarService
       requestType: 'retrieve',
       format: 'csv',
       mostRecentForEachStation: 'constraint',
-      hoursBeforeNow: 1.25,
+      hoursBeforeNow: 2.5,
       stationString: icaos
     }
   end
