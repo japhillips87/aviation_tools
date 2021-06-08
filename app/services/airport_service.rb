@@ -18,8 +18,6 @@ class AirportService
     app_tokens.update(mfb_token: json['access_token'],
                       mfb_refresh_token: json['refresh_token'],
                       mfb_token_expires_at: Time.now.to_i + json['expires_in'])
-
-    schedule_refresh_token_job
   end
 
   private
@@ -28,10 +26,6 @@ class AirportService
 
   def visited_url
     base_url + '/VisitedAirports'
-  end
-
-  def schedule_refresh_token_job
-    self.delay(run_at: 7.days.from_now).refresh_token
   end
 
   def params

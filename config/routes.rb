@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   get '/metars', to: 'metars#index'
   get '/visited_airports', to: 'airports#visited'
+  get '/airports/refresh_token', to: 'airports#refresh_token'
 end
