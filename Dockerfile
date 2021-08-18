@@ -20,5 +20,7 @@ ENV RAILS_ENV production
 
 RUN bin/rails db:migrate
 
+RUN bundle exec whenever --update-crontab
+
 # Start the main process.
 CMD ./start.sh
