@@ -1,18 +1,20 @@
 class AirportsController < ApplicationController
-  before_action :set_icaos, only: :index
-
-  def visited
-    render json: AirportService.new.visited
+  def index
+    render json: Airport.all.map(&:icao)
   end
 
-  def refresh_token
-    AirportService.new.refresh_token
-    head :ok
+  def create
+    airport = Airport.new(airport_params)
+    if airport.save
+      render json: airport
+    else
+      render json: { errors: airport.errors.full_messages }, status: 422
+    end
   end
 
   private
 
-  def set_icaos
-    @icaos = params[:icaos]
+  def airport_params
+    params.require(:airport).permit(:icao)
   end
 end
