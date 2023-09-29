@@ -3,7 +3,12 @@ require 'csv'
 
 class MetarService
   def initialize(icaos)
-    @icaos = icaos.gsub(/\s+/, '')
+    if icaos.present?
+      @icaos = icaos.gsub(/\s+/, '')
+    else
+      @icaos = Airport::DEFAULT_ICAOS
+    end
+
     @url = 'https://aviationweather.gov/adds/dataserver_current/httpparam'
   end
 
