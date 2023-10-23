@@ -9,7 +9,7 @@ class MetarService
       @icaos = Airport::DEFAULT_ICAOS
     end
 
-    @url = 'https://aviationweather.gov/adds/dataserver_current/httpparam'
+    @url = 'https://aviationweather.gov/cgi-bin/data/dataserver.php'
   end
 
   def call
